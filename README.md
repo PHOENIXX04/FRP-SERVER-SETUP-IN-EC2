@@ -256,7 +256,7 @@ The status should show `active (running)`.
 
 ---
 
-## **5. (Optional) Enable FRP Dashboard**
+## **6. Enable FRP Dashboard**
 
 If you've enabled the FRP dashboard (via `dashboard_port = 7500` in `frps.ini`), you can access it in your browser:
 
@@ -268,51 +268,8 @@ Login using the credentials set in `frps.ini` (default: `admin` / `admin`).
 
 ---
 
-## **6. Connecting FRP Client**
-
-To connect to the FRP server, you will need to configure the **FRP client** on another machine.
-
-1. Download the client from [FRP GitHub releases](https://github.com/fatedier/frp/releases).
-2. Edit the `frpc.ini` file to match the server's settings:
-
-```ini
-[common]
-server_addr = <your-ec2-public-ip>
-server_port = 7000
-
-[ssh]
-type = tcp
-local_ip = 127.0.0.1
-local_port = 22
-remote_port = 6000
-```
-
-3. Start the client:
-
-```bash
-cd ~/frp_0.47.0_linux_amd64
-tar -zxvf frp_0.47.0_linux_amd64.tar.gz
-
-```
-
-```bash
-./frpc -c ./frpc.ini
-```
-
-Now, you can access the SSH service from the client by connecting to:
-
-```bash
-ssh -p 6000 user@<your-ec2-public-ip>
-```
-
----
-
-## **8. Conclusion**
+## **7. Conclusion**
 
 Your FRP server is now set up and running on your EC2 instance. You can use FRP to forward ports, access internal services, and more!
 
 For more advanced configurations, refer to the [FRP documentation](https://github.com/fatedier/frp/blob/master/README.md).
-
----
-
-Feel free to modify the README for your specific needs, but this should cover the basics of setting up and running the FRP server on an EC2 instance! Let me know if you need further assistance.
