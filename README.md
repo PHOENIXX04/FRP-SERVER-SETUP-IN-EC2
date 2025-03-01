@@ -21,6 +21,8 @@ This README provides detailed steps on how to set up and configure the **FRP ser
 4. Choose the instance type (e.g., `t2.micro` for free-tier).
 5. Configure the instance details as per your requirements.
 
+   ![1](https://github.com/user-attachments/assets/43d6cbad-1d26-4c57-a7fd-5e37e29e1547)
+
 ---
 
 ### **Step 2: Edit Security Group to Add Port 7000**
@@ -39,6 +41,8 @@ If you need to manually edit the security group after creating the instance:
    - **Port Range**: 7500
    - **Source**: Anywhere (`0.0.0.0/0`) or restrict to specific IP addresses. 
 7. Click **Save rules**.
+
+   ![2](https://github.com/user-attachments/assets/1f74a206-6c87-41cf-800d-c55692907e3c)
 
 To continue the process, you'll need to connect to your EC2 instance via SSH using the terminal. Here’s how you can modify the README to include this step:
 
@@ -96,6 +100,8 @@ sudo apt update
 sudo apt install wget curl -y
 ```
 
+![3](https://github.com/user-attachments/assets/d700f547-30b7-47b6-bac9-e8e0c8a15bc9)
+
 ### **Step 2: Download and Extract FRP**
 
 1. Download the **FRP** binary from the official GitHub releases page:
@@ -104,11 +110,15 @@ sudo apt install wget curl -y
    wget https://github.com/fatedier/frp/releases/download/v0.47.0/frp_0.47.0_linux_amd64.tar.gz
    ```
 
+   ![4](https://github.com/user-attachments/assets/600af1ed-e478-4d63-b69e-2f3b917ec3c7)
+
 2. Extract the tarball:
 
    ```bash
    tar -zxvf frp_0.47.0_linux_amd64.tar.gz
    ```
+
+   ![5](https://github.com/user-attachments/assets/72d78925-c1fa-4b49-a2ae-0633aaf72a54)
 
 3. Navigate to the extracted folder:
 
@@ -121,6 +131,8 @@ You should now have the following files:
 - `frps` (FRP server binary)
 - `frps.ini` (FRP server configuration file)
 
+  ![6](https://github.com/user-attachments/assets/3cc82da5-50d3-4e13-9785-a3f0fc0634a6)
+
 ---
 
 ### **Step 3: Move FRP Files to a Proper Directory**
@@ -131,6 +143,8 @@ Move the `frps` binary and the `frps.ini` configuration file to a proper directo
 sudo mkdir -p /opt/frp
 sudo mv frps frps.ini /opt/frp/
 ```
+
+![7](https://github.com/user-attachments/assets/6069aee4-b16e-427f-a188-95635bf7beb5)
 
 ---
 
@@ -168,6 +182,8 @@ dashboard_pwd = admin     # Dashboard password (optional)
 
 ```
 
+![8](https://github.com/user-attachments/assets/a041f88c-e53e-4f0f-a9c1-c40745b2f25d)
+
 Save and close the file (`CTRL + X`, `Y`, `ENTER`).
 
 ## **4. Start the FRP server**
@@ -175,9 +191,11 @@ Save and close the file (`CTRL + X`, `Y`, `ENTER`).
 Now you can start the FRP server:
 
 ```bash
-   ./frps -c ./frps.ini
+   sudo ./frps -c ./frps.ini
 
 ```
+
+![9](https://github.com/user-attachments/assets/bb628c4e-8964-42e1-bc8c-81e77015f8b8)
 
 ---
 
@@ -215,6 +233,8 @@ WantedBy=multi-user.target
 
 ```
 
+![10](https://github.com/user-attachments/assets/b8ec203c-e1a7-41c3-9e80-ae5b228413aa)
+
 This configuration ensures that the FRP server starts on boot and restarts automatically if it crashes.
 
 ---
@@ -229,22 +249,13 @@ sudo systemctl start frps
 sudo systemctl enable frps
 ```
 
+![11](https://github.com/user-attachments/assets/357351c5-fe5f-4858-a09c-a8e305898006)
+
 This will start the FRP server and ensure it restarts on system reboots.
 
 ---
 
-### **Step 6: Open Necessary Ports in the Security Group**
-
-Ensure that the required ports are open in the EC2 instance’s security group to allow traffic to the FRP server.
-
-1. **Port 7000** (default FRP bind port): Open this for FRP to listen for client connections.
-2. **Port 7500** (if using the dashboard): Open this if you want to access the FRP dashboard.
-
-You can add rules to your security group from the AWS Management Console.
-
----
-
-### **Step 7: Verify the Service Status**
+### **Step 6: Verify the Service Status**
 
 Check the status of the FRP service to ensure it's running properly:
 
@@ -253,6 +264,8 @@ sudo systemctl status frps
 ```
 
 The status should show `active (running)`.
+
+![12](https://github.com/user-attachments/assets/a4daff0a-e2d7-4f8f-9912-313534dc7036)
 
 ---
 
@@ -265,6 +278,8 @@ http://<your-ec2-public-ip>:7500
 ```
 
 Login using the credentials set in `frps.ini` (default: `admin` / `admin`).
+
+![13](https://github.com/user-attachments/assets/4da43cd2-0d7f-4fd0-b7b2-9aa3eccd0bcb)
 
 ---
 
