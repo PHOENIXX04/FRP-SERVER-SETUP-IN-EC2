@@ -34,7 +34,11 @@ If you need to manually edit the security group after creating the instance:
    - **Type**: Custom TCP Rule
    - **Port Range**: 7000
    - **Source**: Anywhere (`0.0.0.0/0`) or restrict to specific IP addresses.
-5. Click **Save rules**.
+5. Add another rule:
+   - **Type**: Custom TCP Rule
+   - **Port Range**: 7500
+   - **Source**: Anywhere (`0.0.0.0/0`) or restrict to specific IP addresses. 
+7. Click **Save rules**.
 
 To continue the process, you'll need to connect to your EC2 instance via SSH using the terminal. Here’s how you can modify the README to include this step:
 
